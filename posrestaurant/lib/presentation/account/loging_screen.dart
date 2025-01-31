@@ -51,7 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
         begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-
               Colors.blueGrey,
               Colors.blueGrey,
               Colors.black..withValues(
@@ -93,8 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: 'Correo o Usuario',
               obscureText: false,
               validator: (value){
-                value = 'desarrollo';
-                if(value!='desarrollo'||value.isEmpty){
+                if(value!='desarrollo'||value!.isEmpty){
                   return 'Ingrese un usuario valido';
                 }
                 return null;
@@ -116,8 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: 'Contraseña',
                       obscureText: obscureText,
                       validator: (value){
-                        value = 'desarrollo';
-                        if(value!='desarrollo'||value.isEmpty){
+                        if(value!='desarrollo'||value!.isEmpty){
                           return 'Ingrese una contraseña valida';
                         }
                         return null;
@@ -167,5 +164,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),),
     );
  }
+
   }
 
