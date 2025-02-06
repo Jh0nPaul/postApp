@@ -138,10 +138,11 @@ List<Categoria> categoriaList =[
 
   Widget _topMenu({
     String title= 'Inserte Menu',
-    String sub = 'Inserte sub',
+    String sub = 'Inserte subtitle',
     required Widget action,
   }){
     return Row(
+
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

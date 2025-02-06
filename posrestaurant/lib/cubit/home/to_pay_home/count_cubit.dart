@@ -11,7 +11,7 @@ class PayCubit extends Cubit<List<Total>> {
             item: MenuItem(
                 title: item.title,
                 price: item.price,
-                item: item.item
+                item: item.item,
             ),
             total: double.parse(item.price),
             items: newList.length +1
