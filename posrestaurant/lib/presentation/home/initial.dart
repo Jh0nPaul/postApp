@@ -17,13 +17,10 @@ class _InitialScreenState extends State<InitialScreen> {
 
 List<Categoria> categoriaList =[
   Categoria(title: 'Burgers'),
-  Categoria(title: 'Pizzas'),
-  Categoria(title: 'Pastas'),
-  Categoria(title: 'Bebidas'),
+  Categoria(title: 'Alitas'),
+  Categoria(title: 'ensaladas'),
   Categoria(title: 'Postres'),
-
   Categoria(title: 'Bebidas'),
-  Categoria(title: 'Postres')
 ];
 
   List<MenuItem> burgerList = [
@@ -114,6 +111,7 @@ List<Categoria> categoriaList =[
                           crossAxisCount:size.width~/280,
                           crossAxisSpacing:10,
                           mainAxisSpacing:10,
+                          mainAxisExtent: 210,
                           childAspectRatio: size.width/(size.height/.55),
                         ),
                         itemCount: burgerList.length,
@@ -285,6 +283,9 @@ List<Categoria> categoriaList =[
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(Colors.orange),
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                )),
               ),
               onPressed: (){
                 print('Cobrar');
@@ -310,6 +311,9 @@ List<Categoria> categoriaList =[
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(Colors.orange),
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                )),
               ),
               onPressed: (){
                 print('Cobrar');
@@ -335,7 +339,7 @@ List<Categoria> categoriaList =[
     );
   }
 
-Widget _item(  MenuItem item, index ){
+  Widget _item(MenuItem item, int index) {
     return Material(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(0),
@@ -348,47 +352,72 @@ Widget _item(  MenuItem item, index ){
         highlightColor: Colors.orange,
         focusColor: Colors.orange,
         borderRadius: BorderRadius.circular(8),
-        onTap: (){
+        onTap: () {
           context.read<PayCubit>().addItem(item);
           print("Item added");
-          },
+        },
         child: Container(
-        // margin: const EdgeInsets.only(right: 20, bottom: 20),
-        padding: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          color: theme.colorScheme.onPrimaryContainer,
-        ),
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+          ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
+            // Evita desbordamiento vertical
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 height: 130,
-                decoration: BoxDecoration(
+                width: double.infinity, // Asegura que la imagen no desborde horizontalmente
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                ),child: Image.asset('assets/images/burguer.jpg'),
+                  child: Image.asset(
+                    'assets/images/burguer.jpg',
+                    fit: BoxFit.cover, // Ajusta la imagen al contenedor
+                  ),
+                ),
               ),
-              const SizedBox(height: 5,),
-              Tooltip( message: item.title,
-                child: Text( item.title, style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize:14,overflow: TextOverflow.ellipsis,
-                ), ),
+              const SizedBox(height: 5),
+              Tooltip(
+                message: item.title,
+                child: SizedBox(
+                  width: double.infinity, // Evita desbordamiento horizontal
+                  child: Text(
+                    item.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
               ),
-              const SizedBox(height: 5,),
+              const SizedBox(height: 5),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Distribuye los elementos en la fila
                 children: [
-                  Text( item.price, style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize:17,
-                  ), ),
-                  Text( item.item, style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize:12,
-                  ), ),
+                  Text(
+                    item.price,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  Flexible(
+                    child: Text(
+                      item.item,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                      overflow: TextOverflow.ellipsis, // Previene desbordamientos
+                      softWrap: false,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -396,7 +425,8 @@ Widget _item(  MenuItem item, index ){
         ),
       ),
     );
-}
+  }
+
 Widget _categoryMenu(){
     return ListView(
       scrollDirection: Axis.horizontal,
@@ -428,16 +458,16 @@ Widget _secondaryItem(Categoria item){
         borderRadius: BorderRadius.circular(12),
         color: theme.colorScheme.onPrimaryContainer,
       ),
-          width: size.width*.15,
+          width: size.width*.09,
           margin: const EdgeInsets.all(5),
           child:Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Icon(Icons.import_contacts),
+      // Icon(Icons.import_contacts, size: ( size.width~/1 ) /size.height/.12,),
       Text(item.title, style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontSize: 18,
+        fontSize: 16,
       ),),
       const SizedBox.shrink(),
     ],

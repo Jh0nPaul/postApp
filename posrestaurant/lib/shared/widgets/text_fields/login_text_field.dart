@@ -16,6 +16,7 @@ class CustomLoginTextField extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return TextFormField(
       cursorColor: Colors.black,
       style: const TextStyle(color: Colors.black),
@@ -23,15 +24,22 @@ class CustomLoginTextField extends StatelessWidget {
       obscureText: obscureText,
       validator: validator,
       decoration: InputDecoration(
+        labelStyle: const TextStyle(color: Colors.black),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.black),
+        hintText: hintText.isEmpty ? 'Enter text' : hintText,
+        hintStyle:  TextStyle(color: Colors.black),
         focusedBorder: OutlineInputBorder(
-          borderSide:  BorderSide(color: Colors.black.withValues(alpha: 0.5)),
+          borderSide:  BorderSide(color:
+          // Colors.black.withValues(alpha: 100)
+            theme.colorScheme.onPrimaryContainer
+          ),
           borderRadius: BorderRadius.circular(8),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.5)),
+          borderSide: BorderSide(color:
+              theme.colorScheme.onPrimaryContainer
+              //  Colors.grey.withValues(alpha: 0.5)
+          ),
           borderRadius: BorderRadius.circular(8),
         ),
         errorBorder: OutlineInputBorder(
