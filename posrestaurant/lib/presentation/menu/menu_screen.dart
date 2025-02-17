@@ -8,8 +8,18 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+
+  late ThemeData theme;
+  late Size size;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    theme = Theme.of(context);
+    size = MediaQuery.of(context).size;
+    return Container(
+
+      width: size.width,
+      height: size.height,
+
+    );
   }
 }

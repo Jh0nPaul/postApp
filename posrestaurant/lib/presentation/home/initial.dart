@@ -22,7 +22,6 @@ List<Categoria> categoriaList =[
   Categoria(title: 'Postres'),
   Categoria(title: 'Bebidas'),
 ];
-
   List<MenuItem> burgerList = [
     MenuItem(
       title: 'Hamburguesa',
@@ -147,17 +146,25 @@ List<Categoria> categoriaList =[
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text( title, style:   TextStyle(
+            Text(
+              title, style: TextStyle(
               fontSize: 24,
-              fontWeight: FontWeight.bold)
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.onPrimary,
+            )
             ),
             const SizedBox(height: 6,),
             Text( sub,  style: TextStyle(
-              fontSize: 10,
+              fontSize: 14,
+              color: theme.colorScheme.onPrimary,
             )),
           ],),
-        Expanded(flex:1,child: Container(width: double.infinity,)),
-        Expanded(flex:5,child: action)
+        Expanded(flex:1,
+            child: Container(
+              width: double.infinity,)),
+        Expanded(flex:5,
+            child: action
+        )
       ],
     );
   }
@@ -166,8 +173,11 @@ List<Categoria> categoriaList =[
     return SizedBox(
       width: size.width,
       child: SearchBar(
-        backgroundColor: WidgetStateProperty.all(theme.colorScheme.onPrimary),
-        hintText: 'Buscar', leading: Icon(Icons.search, color: theme.colorScheme.secondary,),
+        backgroundColor: WidgetStateProperty.all(theme.colorScheme.onSurface),
+        hintText: 'Buscar',
+        hintStyle: WidgetStatePropertyAll(TextStyle(color: theme.colorScheme.onPrimary)),
+        leading: Icon(Icons.search,
+          color: theme.colorScheme.onPrimary,),
         onChanged: (value){
           print(value);
         },
@@ -359,7 +369,7 @@ List<Categoria> categoriaList =[
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
-            color: Theme.of(context).colorScheme.onPrimaryContainer,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -455,7 +465,7 @@ Widget _secondaryItem(Categoria item){
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: theme.colorScheme.onPrimaryContainer,
+        color: theme.colorScheme.onSurface,
       ),
           width: size.width*.09,
           margin: const EdgeInsets.all(5),

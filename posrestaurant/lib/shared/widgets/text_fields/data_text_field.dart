@@ -9,6 +9,7 @@ class InfoTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final Widget? icon;
   final IconData? iconData;
+  final double? width;
   InfoTextField({
     super.key,
     required this.label,
@@ -18,7 +19,8 @@ class InfoTextField extends StatelessWidget {
     required this.isPassword,
     this.validator,
     this.icon,
-    this.iconData
+    this.iconData,
+    this.width = 0.2,
   });
 
   late ThemeData theme;
@@ -30,7 +32,7 @@ class InfoTextField extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: size.width * .2,
+          width: size.width * width!,
           child: TextFormField(
             controller: controller,
             keyboardType: inputType,

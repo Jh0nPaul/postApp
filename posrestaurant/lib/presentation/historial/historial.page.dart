@@ -8,8 +8,17 @@ class HistorialPage extends StatefulWidget {
 }
 
 class _HistorialPageState extends State<HistorialPage> {
+  late ThemeData theme;
+  late Size size;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    theme = Theme.of(context);
+    size = MediaQuery.of(context).size;
+    return Container(
+      color: Colors.red,
+      width: size.width,
+      height: size.height,
+
+    );
   }
 }

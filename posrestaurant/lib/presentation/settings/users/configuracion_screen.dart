@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:posrestaurant/cubit/settings/change_page.dart';
-import 'package:posrestaurant/presentation/settings/users_config.dart';
+import 'package:posrestaurant/presentation/settings/users/users_config.dart';
 class ConfiguracionScreen extends StatefulWidget {
   const ConfiguracionScreen({super.key});
 
@@ -14,7 +14,6 @@ class _ConfiguracionScreenState extends State<ConfiguracionScreen> {
   late ThemeData theme;
   late Size size;
   String activePage = 'General';
-
   _switchPage(state){
           switch(state){
             case 'General':
@@ -59,9 +58,8 @@ class _ConfiguracionScreenState extends State<ConfiguracionScreen> {
         Container(
           height: size.height-200,
           decoration: BoxDecoration(
-          color: theme.colorScheme.onPrimaryContainer,
+          color: theme.colorScheme.onSurface,
           borderRadius: BorderRadius.circular(8),
-
           ),
           width: size.width*.12,
           child: _sideMenu(),
@@ -115,7 +113,7 @@ class _ConfiguracionScreenState extends State<ConfiguracionScreen> {
               child: AnimatedContainer(
                 decoration: BoxDecoration(
                   color: state == title
-                ? theme.colorScheme.primary
+                ? theme.colorScheme.onTertiary
                     :theme.colorScheme.onPrimaryContainer,
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -129,7 +127,7 @@ class _ConfiguracionScreenState extends State<ConfiguracionScreen> {
                     const SizedBox(width: 10,),
                     Icon(iconData),
                     const SizedBox(width: 10,),
-                    SizedBox(child: Text(title)),
+                    SizedBox(child: Text(title, style: TextStyle(color: theme.colorScheme.onPrimary ),),)
                   ],
                 ),
 

@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:posrestaurant/presentation/historial/historial.page.dart';
 import 'package:posrestaurant/presentation/home/initial.dart';
 import 'package:posrestaurant/presentation/menu/menu_screen.dart';
-import 'package:posrestaurant/presentation/settings/configuracion_screen.dart';
 
 import '../../cubit/home/home_page/home_page_selector.dart';
 import '../../cubit/theme/theme_cubit.dart';
+import '../settings/products/products_screen.dart';
+import '../settings/users/configuracion_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocProvider(
       create: (_)=> ChangePageSelector(),
       child: Scaffold(
-        backgroundColor: theme.colorScheme.onPrimaryContainer,
+        backgroundColor: theme.colorScheme.onSurface,
         body: _body(),
       ),
     );
@@ -43,14 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
           width: size.width*.07,
           padding: const EdgeInsets.only(top: 24, right: 12, left: 12),
           height: size.height,
-          color: theme.colorScheme.onPrimaryContainer,
+          color: theme.colorScheme.onSurface,
           child: _sideMenu(),
         ),
         Expanded(child: Container(
           margin: const EdgeInsets.only(top: 24, right: 12),
           padding: const EdgeInsets.only( top:12, right: 12, left: 12 ),
           decoration: BoxDecoration(
-            color: theme.colorScheme.primary,
+            color: theme.colorScheme.onTertiary,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
@@ -105,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: theme.colorScheme.onPrimary,
+            color: theme.colorScheme.onSecondary,
             borderRadius: BorderRadius.circular(30),
           ),
           child:
@@ -119,7 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _themeWidget(){
     return  IconButton(
         onPressed:() => context.read<ThemeCubit>().toggleTheme(isDarkmode = !isDarkmode),
-        icon: Icon(isDarkmode? Icons.dark_mode_outlined:Icons.light_mode_outlined, size: 30,)
+        icon: Icon(isDarkmode? Icons.dark_mode_outlined:Icons.light_mode_outlined,
+          size: 30,
+          color: theme.colorScheme.onPrimary ,)
     );
   }
 
@@ -136,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(vertical:12),
               decoration: BoxDecoration(
                 color: state == menu
-                    ? theme.colorScheme.secondary
+                    ? theme.colorScheme.onSecondary
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -164,8 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
            switch(state){
               case 'Home':
           return InitialScreen();
-              case 'Menu':
-          return MenuScreen();
+              case 'Productos':
+          return ProductsScreen();
              case 'History':
           return HistorialPage();
              case 'Promos':
